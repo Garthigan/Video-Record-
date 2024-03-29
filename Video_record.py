@@ -27,7 +27,7 @@ while cap.isOpened():
     output.write(frame)
 
     # Display the frame
-    cv2.imshow('Frame', frame)
+    #cv2.imshow('Frame', frame)
 
     # Press 'q' to exit
     if cv2.waitKey(1) & 0xFF == ord('q'):
