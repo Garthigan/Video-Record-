@@ -1,7 +1,8 @@
+#Created by Garthi
 import cv2
 
 # RTSP URL
-rtsp_url = 'your_rtsp_url_here'
+rtsp_url = 'your_rtsp_url_here' #Add the Camera Link Here 
 
 # Open the RTSP stream
 cap = cv2.VideoCapture(rtsp_url)
@@ -11,11 +12,18 @@ if not cap.isOpened():
     print("Error: Could not open the camera.")
     exit()
 
+#to get the frame size and frame rate
+frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+fps = cap.get(cv2.CAP_PROP_FPS)
+
 # Define the codec and create VideoWriter object
 # FourCC is a 4-byte code used to specify the video codec
 fourcc = cv2.VideoWriter_fourcc(*'XVID')  # You can use other codecs like 'MJPG', 'X264', etc.
 output_file = 'recorded_video.mkv'
-output = cv2.VideoWriter(output_file, fourcc, 20.0, (640, 480))  # Adjust resolution and framerate as needed
+output = cv2.VideoWriter(output_file, fourcc, fps, (frame_width, frame_height))  # Adjust resolution and framerate as needed
+
+print("Recording Started")
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -26,6 +34,8 @@ while cap.isOpened():
     # Write the frame to the output video file
     output.write(frame)
 
+    print("Recording")
+
     # Display the frame
     #cv2.imshow('Frame', frame)
 
@@ -33,6 +43,7 @@ while cap.isOpened():
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
+Print("Recording Stopped")
 # Release everything
 cap.release()
 output.release()
