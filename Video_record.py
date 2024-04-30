@@ -23,6 +23,8 @@ fourcc = cv2.VideoWriter_fourcc(*'XVID')  # You can use other codecs like 'MJPG'
 output_file = 'recorded_video.mkv'
 output = cv2.VideoWriter(output_file, fourcc, fps, (frame_width, frame_height))  # Adjust resolution and framerate as needed
 
+print("Recording Started")
+
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
@@ -32,6 +34,8 @@ while cap.isOpened():
     # Write the frame to the output video file
     output.write(frame)
 
+    print("Recording")
+
     # Display the frame
     #cv2.imshow('Frame', frame)
 
@@ -39,6 +43,7 @@ while cap.isOpened():
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
+Print("Recording Stopped")
 # Release everything
 cap.release()
 output.release()
